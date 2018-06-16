@@ -2,7 +2,7 @@
 Polychrome is a 3D Modeling video game that aims to leverage the concept of gamification and human intuition to predict human genomics structures.
 
 ## How to Download, Compile, and Run the Source Code
-* From Terminal:
+### From Terminal:
 1. Run the following line is your desired directory:
 ```
 $ git clone https://github.com/andrewjmcgehee/Polychrome.git
@@ -17,7 +17,7 @@ $ java Polychrome
 ```
 
 
-* From Github:
+### From Github:
 1. Navigate to the [Polychrome](https://github.com/andrewjmcgehee/Polychrome) github page in your browser.
 2. Click on the green **Clone or Download** button.
 3. Select either **Open in Desktop** to open the code in the Github Desktop Application or **Download ZIP** to download a simple .zip file.
@@ -27,7 +27,8 @@ $ java Polychrome
 $ javac Polychrome.java
 ```
 6. Run the following line to run the application:
-```$ java Polychrome
+```
+$ java Polychrome
 ```
 
 ## Contributing to the Code Base
