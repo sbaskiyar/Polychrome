@@ -4,6 +4,7 @@ import javafx.scene.*;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
@@ -28,12 +29,12 @@ public class Polychrome extends Application {
     private static final double CAM_NEAR_CLIP = 0.1;
     private static final double CAM_FAR_CLIP = 10000.0;
     private static final double AXIS_LENGTH = 250.0;
-    private static final double HYDROGEN_ANGLE = 90; // TODO
+    private static final double BASE_ANGLE = 90;
     private static final double CONTROL_MULTIPLIER = 0.3;
-    private static final double SHIFT_MULTIPLIER = 2.0;
+    private static final double SHIFT_MULTIPLIER = 3.0;
     private static final double MOUSE_SPEED = 0.1;
     private static final double ROTATION_SPEED = 2.0;
-    private static final double TRACK_SPEED = 0.3;
+    private static final double TRACK_SPEED = 0.5;
 
     double mousePosX;
     double mousePosY;
@@ -98,8 +99,8 @@ public class Polychrome extends Application {
                 mouseOldY = mousePosY;
                 mousePosX = me.getSceneX();
                 mousePosY = me.getSceneY();
-                mouseDeltaX = (mousePosX - mouseOldX);
-                mouseDeltaY = (mousePosY - mouseOldY);
+                mouseDeltaX = mousePosX - mouseOldX;
+                mouseDeltaY = mousePosY - mouseOldY;
 
                 double modifier = 1.0;
 
@@ -113,15 +114,36 @@ public class Polychrome extends Application {
                     camGroup1.ry.setAngle(camGroup1.ry.getAngle() - mouseDeltaX*MOUSE_SPEED*modifier*ROTATION_SPEED);
                     camGroup1.rx.setAngle(camGroup1.rx.getAngle() + mouseDeltaY*MOUSE_SPEED*modifier*ROTATION_SPEED);
                 }
-                else if (me.isSecondaryButtonDown()) {
-                    double z = cam.getTranslateZ();
-                    double newZ = z + -1*mouseDeltaY*MOUSE_SPEED*modifier;
-                    cam.setTranslateZ(newZ);
+                // TODO - modifies camera position. Set to be used when button
+                // camera button movement selected in UI
+
+                // else if (me.isAltDown() && me.isSecondaryButtonDown()) {
+                //     camGroup2.t.setX(camGroup2.t.getX() + mouseDeltaX*MOUSE_SPEED*modifier*TRACK_SPEED);
+                //     camGroup2.t.setY(camGroup2.t.getY() + mouseDeltaY*MOUSE_SPEED*modifier*TRACK_SPEED);
+                // }
+            }
+        });
+
+        scene.setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override public  void handle(ScrollEvent se) {
+                if (!se.isInertia()) {
+                    cam.setTranslateZ(cam.getTranslateZ() + se.getDeltaY());
                 }
-                else if (me.isMiddleButtonDown()) {
-                    camGroup2.t.setX(camGroup2.t.getX() + mouseDeltaX*MOUSE_SPEED*modifier*TRACK_SPEED);
-                    camGroup2.t.setY(camGroup2.t.getY() + mouseDeltaY*MOUSE_SPEED*modifier*TRACK_SPEED);
-                }
+                // mouseOldY = mousePosY;
+                // mousePosY = se.getSceneY();
+                // mouseDeltaY = mousePosY - mouseOldY;
+
+                // double modifier = 1.0;
+
+                // if (se.isControlDown()) {
+                //     modifier = CONTROL_MULTIPLIER;
+                // }
+                // if (se.isShiftDown()) {
+                //     modifier = SHIFT_MULTIPLIER;
+                // }
+                // double z = cam.getTranslateZ();
+                // double newZ = z + -1*mouseDeltaY*MOUSE_SPEED*modifier;
+                // cam.setTranslateZ(newZ);
             }
         });
     }
@@ -206,7 +228,7 @@ public class Polychrome extends Application {
 
         hydrogen1PGroup.setTx(20.0);
         hydrogen2PGroup.setTx(20.0);
-        hydrogen2SidePGroup.setRotateY(HYDROGEN_ANGLE);
+        hydrogen2SidePGroup.setRotateY(BASE_ANGLE);
 
         geneSequence.getChildren().add(moleculePGroup);
 

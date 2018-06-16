@@ -13,11 +13,11 @@ public class pGroup extends Group {
     public Translate p  = new Translate();
     public Translate ip = new Translate();
     public Rotate rx = new Rotate();
-    { rx.setAxis(Rotate.X_AXIS); }
+    {rx.setAxis(Rotate.X_AXIS);};
     public Rotate ry = new Rotate();
-    { ry.setAxis(Rotate.Y_AXIS); }
+    {ry.setAxis(Rotate.Y_AXIS);};
     public Rotate rz = new Rotate();
-    { rz.setAxis(Rotate.Z_AXIS); }
+    {rz.setAxis(Rotate.Z_AXIS);};
     public Scale s = new Scale();
 
     public pGroup() {
@@ -27,26 +27,25 @@ public class pGroup extends Group {
 
     public pGroup(RotateOrder rotateOrder) {
         super();
-        // choose the order of rotations based on the rotateOrder
         switch (rotateOrder) {
-        case XYZ:
-            getTransforms().addAll(t, p, rz, ry, rx, s, ip);
-            break;
-        case XZY:
-            getTransforms().addAll(t, p, ry, rz, rx, s, ip);
-            break;
-        case YXZ:
-            getTransforms().addAll(t, p, rz, rx, ry, s, ip);
-            break;
-        case YZX:
-            getTransforms().addAll(t, p, rx, rz, ry, s, ip);  // For Camera
-            break;
-        case ZXY:
-            getTransforms().addAll(t, p, ry, rx, rz, s, ip);
-            break;
-        case ZYX:
-            getTransforms().addAll(t, p, rx, ry, rz, s, ip);
-            break;
+            case XYZ:
+                getTransforms().addAll(t, p, rz, ry, rx, s, ip);
+                break;
+            case XZY:
+                getTransforms().addAll(t, p, ry, rz, rx, s, ip);
+                break;
+            case YXZ:
+                getTransforms().addAll(t, p, rz, rx, ry, s, ip);
+                break;
+            case YZX:
+                getTransforms().addAll(t, p, rx, rz, ry, s, ip);  // For Camera
+                break;
+            case ZXY:
+                getTransforms().addAll(t, p, ry, rx, rz, s, ip);
+                break;
+            case ZYX:
+                getTransforms().addAll(t, p, rx, ry, rz, s, ip);
+                break;
         }
     }
 
@@ -144,28 +143,5 @@ public class pGroup extends Group {
         ip.setX(0.0);
         ip.setY(0.0);
         ip.setZ(0.0);
-    }
-
-    @Override public String toString() {
-        return "pGroup[t = (" +
-                           t.getX() + ", " +
-                           t.getY() + ", " +
-                           t.getZ() + ")  " +
-                           "r = (" +
-                           rx.getAngle() + ", " +
-                           ry.getAngle() + ", " +
-                           rz.getAngle() + ")  " +
-                           "s = (" +
-                           s.getX() + ", " +
-                           s.getY() + ", " +
-                           s.getZ() + ")  " +
-                           "p = (" +
-                           p.getX() + ", " +
-                           p.getY() + ", " +
-                           p.getZ() + ")  " +
-                           "ip = (" +
-                           ip.getX() + ", " +
-                           ip.getY() + ", " +
-                           ip.getZ() + ")]";
     }
 }
