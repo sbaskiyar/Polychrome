@@ -3,23 +3,32 @@ Polychrome is a 3D Modeling video game that aims to leverage the concept of gami
 
 ## How to Download, Compile, and Run the Source Code
 * From Terminal:
-    1. Run the following line is your desired directory:
-    `$ git clone https://github.com/andrewjmcgehee/Polychrome.git`
-    2. Run the following line to compile the code:
-    `$ javac Polychrome.java`
-    3. Run the following line to run the application:
-    `$ java Polychrome`
+1. Run the following line is your desired directory:
+```
+$ git clone https://github.com/andrewjmcgehee/Polychrome.git
+```
+2. Run the following line to compile the code:
+```
+$ javac Polychrome.java
+```
+3. Run the following line to run the application:
+```
+$ java Polychrome
+```
 
 
 * From Github:
-    1. Navigate to [this page](https://github.com/andrewjmcgehee/Polychrome) in your browser.
-    2. Click on the green **Clone or Download** button.
-    3. Select either **Open in Desktop** to open the code in the Github Desktop Application or **Download ZIP** to download a simple .zip file.
-    4. If you selected to download a .zip file, unzip it in your directory of choice.
-    5. Run the following line to compile the code:
-    `$ javac Polychrome.java`
-    6. Run the following line to run the application:
-    `$ java Polychrome`
+1. Navigate to the [Polychrome](https://github.com/andrewjmcgehee/Polychrome) github page in your browser.
+2. Click on the green **Clone or Download** button.
+3. Select either **Open in Desktop** to open the code in the Github Desktop Application or **Download ZIP** to download a simple .zip file.
+4. If you selected to download a .zip file, unzip it in your directory of choice.
+5. Run the following line to compile the code:
+```
+$ javac Polychrome.java
+```
+6. Run the following line to run the application:
+```$ java Polychrome
+```
 
 ## Contributing to the Code Base
 When contributing to the code base, our best practices are as follows:
@@ -38,11 +47,11 @@ When contributing to the code base, our best practices are as follows:
     - [Luke Skywalker] - Add feature to log last location of lightsaber.
     - [Han Solo] - Add feature to hide Luke's lightsaber.
     ```
-    **NOTE**
+    **NOTE:**
     * Present Tense
     * Punctuated
-    * Version Placeholder Included (this will updated upon each push from develop to master)
-    * Roughly One Line per Change (keep it brief)
+    * Version Placeholder Included *(this will be updated upon each push from develop to master)*
+    * Roughly One Line per Change *(keep it brief!)*
 
 ## Conventions Used
 * A line preceded by '$' indicates a line run at the command line prompt
