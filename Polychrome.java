@@ -28,8 +28,6 @@ public class Polychrome extends Application {
     private static final double CAM_INIT_Y_ANGLE = 315.0;
     private static final double CAM_NEAR_CLIP = 0.1;
     private static final double CAM_FAR_CLIP = 10000.0;
-    private static final double CAM_MIN_ZOOM = -100;
-    private static final double CAM_MAX_ZOOM = -500;
     private static final double AXIS_LENGTH = 250.0;
     private static final double BASE_ANGLE = 90;
     private static final double CONTROL_MULTIPLIER = 0.3;
@@ -116,7 +114,6 @@ public class Polychrome extends Application {
                     camGroup1.ry.setAngle(camGroup1.ry.getAngle() - mouseDeltaX*MOUSE_SPEED*modifier*ROTATION_SPEED);
                     camGroup1.rx.setAngle(camGroup1.rx.getAngle() + mouseDeltaY*MOUSE_SPEED*modifier*ROTATION_SPEED);
                 }
-
                 // TODO - modifies camera position. Set to be used when button
                 // camera button movement selected in UI
 
@@ -129,18 +126,24 @@ public class Polychrome extends Application {
 
         scene.setOnScroll(new EventHandler<ScrollEvent>() {
             @Override public  void handle(ScrollEvent se) {
-                double zoom = cam.getTranslateZ() + se.getDeltaY();
                 if (!se.isInertia()) {
-                    if (zoom >= CAM_MIN_ZOOM) {
-                        cam.setTranslateZ(CAM_MIN_ZOOM);
-                    }
-                    else if (zoom <= CAM_MAX_ZOOM) {
-                        cam.setTranslateZ(CAM_MAX_ZOOM);
-                    }
-                    else {
-                        cam.setTranslateZ(cam.getTranslateZ() + se.getDeltaY());
-                    }
+                    cam.setTranslateZ(cam.getTranslateZ() + se.getDeltaY());
                 }
+                // mouseOldY = mousePosY;
+                // mousePosY = se.getSceneY();
+                // mouseDeltaY = mousePosY - mouseOldY;
+
+                // double modifier = 1.0;
+
+                // if (se.isControlDown()) {
+                //     modifier = CONTROL_MULTIPLIER;
+                // }
+                // if (se.isShiftDown()) {
+                //     modifier = SHIFT_MULTIPLIER;
+                // }
+                // double z = cam.getTranslateZ();
+                // double newZ = z + -1*mouseDeltaY*MOUSE_SPEED*modifier;
+                // cam.setTranslateZ(newZ);
             }
         });
     }
@@ -168,7 +171,7 @@ public class Polychrome extends Application {
         });
     }
 
-    private void buildSequence() {
+    private void buildMolecule() {
 
         final PhongMaterial redMaterial = new PhongMaterial();
         redMaterial.setDiffuseColor(Color.DARKRED);
@@ -182,23 +185,23 @@ public class Polychrome extends Application {
         greyMaterial.setDiffuseColor(Color.DARKGREY);
         greyMaterial.setSpecularColor(Color.GREY);
 
-        pGroup sequencePGroup = new pGroup();
-        pGroup sphere1PGroup = new pGroup();
-        pGroup sphere2SidePGroup = new pGroup();
-        pGroup sphere2PGroup = new pGroup();
-        pGroup sphere3SidePGroup = new pGroup();
-        pGroup sphere3PGroup = new pGroup();
+        pGroup moleculePGroup = new pGroup();
+        pGroup oxygenPGroup = new pGroup();
+        pGroup hydrogen1SidePGroup = new pGroup();
+        pGroup hydrogen1PGroup = new pGroup();
+        pGroup hydrogen2SidePGroup = new pGroup();
+        pGroup hydrogen2PGroup = new pGroup();
 
-        Sphere sphere1 = new Sphere(5);
-        sphere1.setMaterial(redMaterial);
+        Sphere oxygenSphere = new Sphere(5);
+        oxygenSphere.setMaterial(redMaterial);
 
-        Sphere sphere2 = new Sphere(5);
-        sphere2.setMaterial(whiteMaterial);
-        sphere2.setTranslateX(0.0);
+        Sphere hydrogen1Sphere = new Sphere(5);
+        hydrogen1Sphere.setMaterial(whiteMaterial);
+        hydrogen1Sphere.setTranslateX(0.0);
 
-        Sphere sphere3 = new Sphere(5);
-        sphere3.setMaterial(whiteMaterial);
-        sphere3.setTranslateZ(0.0);
+        Sphere hydrogen2Sphere = new Sphere(5);
+        hydrogen2Sphere.setMaterial(whiteMaterial);
+        hydrogen2Sphere.setTranslateZ(0.0);
 
         Cylinder bond1Cylinder = new Cylinder(1, 20);
         bond1Cylinder.setMaterial(greyMaterial);
@@ -212,22 +215,22 @@ public class Polychrome extends Application {
         bond2Cylinder.setRotationAxis(Rotate.Z_AXIS);
         bond2Cylinder.setRotate(90.0);
 
-        sequencePGroup.getChildren().add(sphere1PGroup);
-        sequencePGroup.getChildren().add(sphere2SidePGroup);
-        sequencePGroup.getChildren().add(sphere3SidePGroup);
-        sphere1PGroup.getChildren().add(sphere1);
-        sphere2SidePGroup.getChildren().add(sphere2PGroup);
-        sphere3SidePGroup.getChildren().add(sphere3PGroup);
-        sphere2PGroup.getChildren().add(sphere2);
-        sphere3PGroup.getChildren().add(sphere3);
-        sphere2SidePGroup.getChildren().add(bond1Cylinder);
-        sphere3SidePGroup.getChildren().add(bond2Cylinder);
+        moleculePGroup.getChildren().add(oxygenPGroup);
+        moleculePGroup.getChildren().add(hydrogen1SidePGroup);
+        moleculePGroup.getChildren().add(hydrogen2SidePGroup);
+        oxygenPGroup.getChildren().add(oxygenSphere);
+        hydrogen1SidePGroup.getChildren().add(hydrogen1PGroup);
+        hydrogen2SidePGroup.getChildren().add(hydrogen2PGroup);
+        hydrogen1PGroup.getChildren().add(hydrogen1Sphere);
+        hydrogen2PGroup.getChildren().add(hydrogen2Sphere);
+        hydrogen1SidePGroup.getChildren().add(bond1Cylinder);
+        hydrogen2SidePGroup.getChildren().add(bond2Cylinder);
 
-        sphere2PGroup.setTx(20.0);
-        sphere3PGroup.setTx(20.0);
-        sphere3SidePGroup.setRotateY(BASE_ANGLE);
+        hydrogen1PGroup.setTx(20.0);
+        hydrogen2PGroup.setTx(20.0);
+        hydrogen2SidePGroup.setRotateY(BASE_ANGLE);
 
-        geneSequence.getChildren().add(sequencePGroup);
+        geneSequence.getChildren().add(moleculePGroup);
 
         world.getChildren().addAll(geneSequence);
     }
@@ -239,7 +242,7 @@ public class Polychrome extends Application {
 
         buildCam();
         buildAxes();
-        buildSequence();
+        buildMolecule();
 
         Scene scene = new Scene(root, 1024, 768, true);
         scene.setFill(Color.GREY);

@@ -1,5 +1,6 @@
 x.x.x
 -----
+- [Andrew McGehee] - Add keyboard input for x y z rotations.
 - [Andrew McGehee] - Add minimum and maximum zoom range for camera.
 - [Andrew McGehee] - Add support for Mac trackpad scroll events.
 - [Andrew McGehee] - Rename variables to closer resemble DNA vocabulary.

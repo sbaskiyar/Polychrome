@@ -37,6 +37,7 @@ When contributing to the code base, our best practices are as follows:
 * Create new feature branches from the develop branch.
 * Create initial pull requests from your feature branch to the develop branch.
 * Test your code prior to submitting pull requests.
+* After testing, delete .class files prior to commiting the changes to a feature branch.
 * When reviewing pull requests, carefully review the git diff before approving the changes.
 * Make small, frequent commits that accomplish a single, identifiable change.
 * Use descriptive, brief, present tense commit messages.
